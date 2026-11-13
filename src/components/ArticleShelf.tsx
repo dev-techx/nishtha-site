@@ -54,14 +54,14 @@ export default function ArticleShelf() {
   }
 
   return (
-    <section id="articles" className="py-20 lg:py-28 wood-bg relative min-h-[60vh]">
+    <section id="articles" className="py-16 lg:py-24 library-bg relative min-h-[60vh]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <p className="font-ui text-sm uppercase tracking-widest text-library-gold-light mb-3">
+          <p className="font-ui text-sm uppercase tracking-widest text-library-gold mb-3">
             The Collection
           </p>
-          <h2 className="font-serif-display text-4xl sm:text-5xl md:text-6xl font-bold text-library-cream mb-6">
+          <h2 className="font-serif-display text-4xl sm:text-5xl md:text-6xl font-bold text-library-wood-dark mb-6">
             Article Shelves
           </h2>
           <div className="gold-divider mx-auto w-32" />
@@ -69,8 +69,8 @@ export default function ArticleShelf() {
 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20">
-            <Loader2 size={40} className="text-library-gold-light animate-spin" />
-            <p className="font-ui text-library-cream/60 mt-4">Loading articles...</p>
+            <Loader2 size={40} className="text-library-gold animate-spin" />
+            <p className="font-ui text-library-ink/60 mt-4">Loading articles...</p>
           </div>
         ) : (
           <>
@@ -91,8 +91,8 @@ export default function ArticleShelf() {
                       return (
                         <div
                           key={article.id}
-                          className="book-cover rounded-lg overflow-hidden cursor-pointer group animate-shelf-appear"
-                          style={{ background: color.bg, boxShadow: '0 8px 16px rgba(0,0,0,0.3)' }}
+                          className="book-cover rounded-xl overflow-hidden cursor-pointer group animate-shelf-appear border border-slate-200"
+                          style={{ background: color.bg, boxShadow: '0 8px 24px rgba(30,45,65,0.10)' }}
                           onClick={() => setSelected(article)}
                         >
                           {article.image_url ? (
@@ -144,7 +144,7 @@ export default function ArticleShelf() {
                 <div className="shelf-board h-3 mb-0" />
                 <div className="flex items-end justify-center gap-1 sm:gap-2 md:gap-3 lg:gap-4 px-2 sm:px-4 pt-6 pb-2 flex-wrap min-h-[200px]">
                   {shelf.length === 0 ? (
-                    <p className="font-body italic text-library-cream/50 py-12">
+                    <p className="font-body italic text-library-ink/50 py-12">
                       The shelves are waiting to be filled...
                     </p>
                   ) : (
