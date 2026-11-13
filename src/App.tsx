@@ -7,6 +7,7 @@ import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
 import AdminLogin from '@/components/AdminLogin';
 import AdminDashboard from '@/components/AdminDashboard';
+import { supabase } from '@/lib/supabase';
 
 type View = 'website' | 'admin-login' | 'admin-dashboard';
 
@@ -14,9 +15,13 @@ export default function App() {
   const [view, setView] = useState<View>('website');
 
   useEffect(() => {
-    if (sessionStorage.getItem('nishta_admin') === 'authenticated') {
-      // Keep admin session if returning
-    }
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) setView('admin-dashboard');
+    });
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session && view === 'admin-dashboard') setView('website');
+    });
+    return () => listener.subscription.unsubscribe();
   }, []);
 
   const handleNavigate = (section: string) => {
@@ -30,39 +35,23 @@ export default function App() {
 
   const scrollToSection = (section: string) => {
     const el = document.getElementById(section);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const handleAdminClick = () => {
-    if (sessionStorage.getItem('nishta_admin') === 'authenticated') {
-      setView('admin-dashboard');
-    } else {
-      setView('admin-login');
-    }
+  const handleAdminClick = async () => {
+    const { data } = await supabase.auth.getSession();
+    setView(data.session ? 'admin-dashboard' : 'admin-login');
   };
 
-  const handleAdminSuccess = () => {
-    setView('admin-dashboard');
-  };
-
-  const handleLogout = () => {
-    sessionStorage.removeItem('nishta_admin');
+  const handleAdminSuccess = () => setView('admin-dashboard');
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     setView('website');
   };
+  const handleBack = () => setView('website');
 
-  const handleBack = () => {
-    setView('website');
-  };
-
-  if (view === 'admin-login') {
-    return <AdminLogin onSuccess={handleAdminSuccess} onBack={handleBack} />;
-  }
-
-  if (view === 'admin-dashboard') {
-    return <AdminDashboard onLogout={handleLogout} onBack={handleBack} />;
-  }
+  if (view === 'admin-login') return <AdminLogin onSuccess={handleAdminSuccess} onBack={handleBack} />;
+  if (view === 'admin-dashboard') return <AdminDashboard onLogout={handleLogout} onBack={handleBack} />;
 
   return (
     <div className="min-h-screen library-bg">
