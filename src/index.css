@@ -449,3 +449,28 @@ h1, h2, h3, h4 {
 .delay-3 { animation-delay: 0.3s; }
 .delay-4 { animation-delay: 0.4s; }
 .delay-5 { animation-delay: 0.5s; }
+
+/* NISHTHA refresh: quieter editorial palette, less texture, lighter surfaces */
+:root{--library-bg:#f7f8fa;--library-bg-dark:#edf0f4;--wood-dark:#253247;--wood-mid:#34465f;--wood-light:#718096;--shelf-brown:#dbe2ea;--gold:#b28a43;--gold-light:#d0aa62;--leather:#34465f;--cream:#fff;--ink:#202938;--accent-red:#a34747;--accent-green:#2e7657}
+body{font-family:'Inter',system-ui,sans-serif;color:#263244}
+h1,h2,h3,h4{letter-spacing:-.025em}
+.library-bg{background:#f7f8fa}
+.paper-bg,.paper-texture{background-color:#fff;background-image:none}
+.wood-bg{background:linear-gradient(135deg,#243247,#31435b)}
+.wood-shelf,.shelf-board{background:linear-gradient(180deg,#dce4ed,#cbd5e1);box-shadow:0 5px 14px rgba(34,48,69,.08),inset 0 1px rgba(255,255,255,.85);border-radius:8px}
+.shelf-board::before{display:none}
+.book-spine,.book-cover{transition:transform .22s ease,box-shadow .22s ease}
+.book-spine:hover{transform:translateY(-5px);box-shadow:0 8px 16px rgba(25,40,60,.18)}
+.book-cover:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(25,40,60,.14)}
+.library-bg{background-image:radial-gradient(ellipse at 10% 0%,rgba(181,145,75,.06),transparent 35%)}
+.nav-glass{background:rgba(255,255,255,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(38,50,68,.08)}
+.btn-primary{background:#26364d;border:1px solid #26364d;box-shadow:0 3px 8px rgba(38,54,77,.12)}
+.btn-primary:hover{background:#17263a;box-shadow:0 7px 16px rgba(38,54,77,.18)}
+.btn-gold{background:#d0aa62;color:#243247}
+.btn-gold:hover{background:#c49a4c;box-shadow:0 6px 14px rgba(176,138,67,.2)}
+.input-library{font-family:'Inter',system-ui,sans-serif;background:#fff;border-color:#dbe2ea}
+.gold-divider{background:linear-gradient(90deg,transparent,#d0aa62,#b28a43,#d0aa62,transparent)}
+.pin-badge{background:#d0aa62;color:#243247;box-shadow:none}
+:focus-visible{outline:3px solid rgba(176,138,67,.65);outline-offset:3px}
+html{scroll-behavior:smooth;scroll-padding-top:88px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
