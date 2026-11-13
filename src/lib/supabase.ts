@@ -23,6 +23,3 @@ export interface Subscriber {
   email: string;
   created_at: string;
 }
-
-export const ADMIN_USERNAME = 'admin';
-export const ADMIN_PASSWORD = 'techxadmin@00';
