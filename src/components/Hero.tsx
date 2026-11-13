@@ -15,7 +15,7 @@ export default function Hero({ onNavigate }: HeroProps) {
         <img
           src="https://images.pexels.com/photos/256541/pexels-photo-256541.jpeg?auto=compress&cs=tinysrgb&w=1920"
           alt="Library"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover"\n          fetchPriority="high"\n          decoding="async"
         />
         <div className="absolute inset-0 hero-overlay" />
       </div>
