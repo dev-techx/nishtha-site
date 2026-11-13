@@ -33,7 +33,7 @@ export default function Navbar({ onNavigate, onAdminClick }: NavbarProps) {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-smooth ${
           scrolled
-            ? 'wood-bg shadow-lg py-2'
+            ? 'nav-glass shadow-sm py-2'
             : 'bg-transparent py-4'
         }`}
       >
@@ -50,7 +50,7 @@ export default function Navbar({ onNavigate, onAdminClick }: NavbarProps) {
             />
             <span
               className={`font-serif-display text-2xl font-bold tracking-wide transition-smooth ${
-                scrolled ? 'text-library-cream' : 'text-library-cream'
+                scrolled ? 'text-library-wood-dark' : 'text-white'
               }`}
             >
               NISHTHA
@@ -64,7 +64,7 @@ export default function Navbar({ onNavigate, onAdminClick }: NavbarProps) {
                 key={item.section}
                 onClick={() => handleNavClick(item.section)}
                 className={`font-ui text-sm font-medium tracking-wide transition-smooth hover:text-library-gold-light ${
-                  scrolled ? 'text-library-cream' : 'text-library-cream/90'
+                  scrolled ? 'text-library-wood-dark' : 'text-white/90'
                 }`}
               >
                 {item.label}
@@ -82,7 +82,7 @@ export default function Navbar({ onNavigate, onAdminClick }: NavbarProps) {
           {/* Hamburger */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`md:hidden ${scrolled ? 'text-library-cream' : 'text-library-cream'}`}
+            className={`md:hidden ${scrolled ? 'text-library-wood-dark' : 'text-white'}`}
             aria-label="Toggle menu"
           >
             {isOpen ? <X size={26} /> : <Menu size={26} />}
