@@ -486,3 +486,13 @@ html{scroll-behavior:smooth;scroll-padding-top:88px}
 .card,.article-card,.paper-card{box-shadow:0 5px 20px rgba(25,40,60,.055)!important;border:1px solid #e7ebf0!important;border-radius:10px!important}
 .wood-shelf,.shelf-board{box-shadow:none!important}
 @media(max-width:640px){.hero-overlay{background:linear-gradient(180deg,rgba(10,20,34,.78),rgba(13,25,42,.72))}.hero-kicker{font-size:.62rem;letter-spacing:.13em}}
+
+/* Clean, plain institutional design system */
+body{background:#f7f8fa;color:#172235}
+.library-bg{background:#f7f8fa!important;background-image:none!important}
+.paper-bg,.paper-texture{background:#fff!important;background-image:none!important}
+.ornament::before,.ornament::after{display:none!important}
+.gold-divider{height:1px!important;background:#e6d5b4!important}
+.pin-badge{border-radius:3px!important;letter-spacing:.08em}
+.article-editorial-card{transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;box-shadow:0 3px 12px rgba(20,35,55,.035)}
+.article-editorial-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(20,35,55,.09);border-color:#cbd5e1}
