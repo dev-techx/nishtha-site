@@ -15,7 +15,7 @@ export default function Footer() {
         <div className="gold-divider mx-auto w-32 mb-6" />
 
         {/* Copyright */}
-        <p className="font-ui text-xs text-center text-library-cream/50 leading-relaxed max-w-3xl mx-auto">
+        <p className="font-ui text-xs text-center text-white/65 leading-relaxed max-w-3xl mx-auto">
           © {new Date().getFullYear()} NISHTHA. All rights reserved. All content published on this
           platform is the intellectual property of NISHTHA and is protected under the Information
           Technology Act, 2000, and applicable copyright laws. Unauthorized reproduction,
@@ -23,7 +23,7 @@ export default function Footer() {
           prohibited and may attract penal action under relevant IT and cyber law provisions.
         </p>
 
-        <div className="mt-6 pt-6 border-t border-library-wood-light/20 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="mt-6 pt-6 border-t border-white/15 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
             href="https://instagram.com/techx.sh"
             target="_blank"
