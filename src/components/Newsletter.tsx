@@ -16,17 +16,21 @@ export default function Newsletter() {
     }
 
     setStatus('loading');
+    const normalizedEmail = email.trim().toLowerCase();
     const { error } = await supabase
       .from('subscribers')
-      .insert({ email: email.trim().toLowerCase() });
+      .insert({ email: normalizedEmail });
 
     if (error) {
       if (error.code === '23505') {
         setStatus('error');
         setMessage('You are already subscribed. Thank you!');
       } else {
+        console.error('Newsletter signup failed:', error);
         setStatus('error');
-        setMessage('Something went wrong. Please try again.');
+        setMessage(error.code === '42501' || error.code === 'PGRST301'
+          ? 'Newsletter signup is not configured yet. Please try again later.'
+          : 'We could not save your subscription right now. Please try again shortly.');
       }
     } else {
       setStatus('success');
@@ -79,13 +83,13 @@ export default function Newsletter() {
 
             {/* Status messages */}
             {status === 'success' && (
-              <div className="flex items-center justify-center gap-2 mt-4 text-library-green animate-fade-in">
+              <div className="flex items-center justify-center gap-2 mt-4 text-library-green animate-fade-in" role="status" aria-live="polite">
                 <CheckCircle size={18} />
                 <span className="font-body text-sm">{message}</span>
               </div>
             )}
             {status === 'error' && (
-              <div className="flex items-center justify-center gap-2 mt-4 text-library-red animate-fade-in">
+              <div className="flex items-center justify-center gap-2 mt-4 text-library-red animate-fade-in" role="alert" aria-live="polite">
                 <AlertCircle size={18} />
                 <span className="font-body text-sm">{message}</span>
               </div>
