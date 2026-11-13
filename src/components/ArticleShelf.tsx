@@ -78,7 +78,7 @@ export default function ArticleShelf() {
             {pinnedArticles.length > 0 && (
               <div className="mb-12">
                 <div className="flex items-center gap-2 mb-6">
-                  <Pin size={20} className="text-library-gold-light" fill="currentColor" />
+                  <Pin size={20} className="text-library-gold" fill="currentColor" />
                   <h3 className="font-serif-display text-2xl font-semibold text-library-cream">
                     Featured
                   </h3>
