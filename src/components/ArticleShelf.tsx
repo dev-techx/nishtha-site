@@ -57,12 +57,12 @@ export default function ArticleShelf() {
     <section id="articles" className="py-16 lg:py-24 library-bg relative min-h-[60vh]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-left mb-12">
           <p className="font-ui text-sm uppercase tracking-widest text-library-gold mb-3">
-            The Collection
+            INSIGHTS & ANALYSIS
           </p>
           <h2 className="font-serif-display text-4xl sm:text-5xl md:text-6xl font-bold text-library-wood-dark mb-6">
-            Article Shelves
+            Latest Articles
           </h2>
           <div className="gold-divider mx-auto w-32" />
         </div>
@@ -80,7 +80,7 @@ export default function ArticleShelf() {
                 <div className="flex items-center gap-2 mb-6">
                   <Pin size={20} className="text-library-gold" fill="currentColor" />
                   <h3 className="font-serif-display text-2xl font-semibold text-library-cream">
-                    Featured
+                    Editor's Picks
                   </h3>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -138,63 +138,20 @@ export default function ArticleShelf() {
               </div>
             )}
 
-            {/* Regular articles — bookshelf display */}
-            {shelves.map((shelf, shelfIdx) => (
-              <div key={shelfIdx} className="mb-10">
-                <div className="shelf-board h-3 mb-0" />
-                <div className="flex items-end justify-center gap-1 sm:gap-2 md:gap-3 lg:gap-4 px-2 sm:px-4 pt-6 pb-2 flex-wrap min-h-[200px]">
-                  {shelf.length === 0 ? (
-                    <p className="font-body italic text-library-ink/50 py-12">
-                      The shelves are waiting to be filled...
-                    </p>
-                  ) : (
-                    shelf.map((article, bookIdx) => {
-                      const color = getColor(shelfIdx * chunkSize + bookIdx);
-                      const spineWidth = 48 + (article.heading.length % 20);
-                      return (
-                        <div
-                          key={article.id}
-                          className="book-spine book-on-shelf rounded-t-sm rounded-b-md flex flex-col items-center justify-between py-4 px-2 animate-shelf-appear"
-                          style={{
-                            background: color.bg,
-                            width: `${spineWidth}px`,
-                            height: '190px',
-                            boxShadow: 'inset -2px 0 4px rgba(0,0,0,0.3), inset 2px 0 2px rgba(255,255,255,0.1)',
-                            borderLeft: `2px solid ${color.accent}40`,
-                            borderRight: '1px solid rgba(0,0,0,0.3)',
-                            animationDelay: `${bookIdx * 0.08}s`,
-                          }}
-                          onClick={() => setSelected(article)}
-                        >
-                          <div
-                            className="w-full h-1 rounded-full mb-3"
-                            style={{ background: color.accent, opacity: 0.6 }}
-                          />
-                          <p
-                            className="font-serif-display text-xs font-semibold text-library-cream text-center leading-tight"
-                            style={{
-                              writingMode: 'vertical-rl',
-                              textOrientation: 'mixed',
-                              whiteSpace: 'nowrap',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              maxHeight: '130px',
-                            }}
-                          >
-                            {article.heading}
-                          </p>
-                          <div
-                            className="w-full h-1 rounded-full mt-3"
-                            style={{ background: color.accent, opacity: 0.6 }}
-                          />
-                        </div>
-                      );
-                    })
-                  )}
-                </div>
-                <div className="shelf-board h-4" />
-              </div>
-            ))}
+            {/* Regular articles — clean editorial cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+              {regularArticles.map((article) => (
+                <article key={article.id} onClick={() => setSelected(article)} className="article-editorial-card group cursor-pointer overflow-hidden bg-white rounded-xl border border-slate-200">
+                  {article.image_url ? <div className="h-48 overflow-hidden bg-slate-100"><img src={article.image_url} alt={article.heading} loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" onError={(e)=>{(e.target as HTMLImageElement).style.display='none'}}/></div> : <div className="h-2 bg-gradient-to-r from-[#26364d] to-[#d4ad68]"/>}
+                  <div className="p-6">
+                    <p className="text-xs uppercase tracking-[.14em] text-slate-500 mb-3">{article.name}</p>
+                    <h3 className="text-xl font-semibold leading-snug text-slate-900 mb-3 group-hover:text-[#344b69]">{article.heading}</h3>
+                    <p className="text-sm leading-6 text-slate-600 line-clamp-3">{article.description}</p>
+                    <div className="mt-5 text-sm font-semibold text-[#344b69]">Read article →</div>
+                  </div>
+                </article>
+              ))}
+            </div>
           </>
         )}
       </div>
