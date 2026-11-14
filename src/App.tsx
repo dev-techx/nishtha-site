@@ -17,5 +17,13 @@ export default function App() {
  const handleAdminClick=async()=>{const {data}=await supabase.auth.getSession();setView(data.session?'admin-dashboard':'admin-login')};
  if(view==='admin-login')return <AdminLogin onSuccess={()=>setView('admin-dashboard')} onBack={()=>setView('website')}/>;
  if(view==='admin-dashboard')return <AdminDashboard onLogout={async()=>{await supabase.auth.signOut();setView('website')}} onBack={()=>setView('website')}/>;
- return <div className="min-h-screen library-bg"><Navbar onNavigate={handleNavigate} onAdminClick={handleAdminClick}/><Hero onNavigate={handleNavigate}/><About/><ArticleShelf/><Footer/></div>;
+ return <div className="site-frame min-h-0 library-bg">
+   <Navbar onNavigate={handleNavigate} onAdminClick={handleAdminClick}/>
+   <main id="site-scroll" className="site-scroll-area" aria-label="Website content">
+     <Hero onNavigate={handleNavigate}/>
+     <About/>
+     <ArticleShelf/>
+   </main>
+   <Footer/>
+ </div>;
 }
