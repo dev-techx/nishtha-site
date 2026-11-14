@@ -50,10 +50,7 @@ export default function About() {
             We bring together diverse voices from government, academia, civil society, and the research community to examine contemporary issues, exchange perspectives, and highlight ideas that can contribute to effective and inclusive governance.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {pillars.map(({icon: Icon, title, text}) => <div key={title} className="bg-white border border-slate-200 rounded-xl p-6"><Icon size={25} className="text-[#a8792c] mb-4"/><h3 className="font-semibold text-lg text-[#142640] mb-2">{title}</h3><p className="text-sm leading-6 text-slate-600">{text}</p></div>)}
-        </div>
-      </div>
+/div>
 
       <div id="founders" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
         <div className="text-center mb-10"><p className="text-sm uppercase tracking-[.18em] text-[#a8792c] mb-3">The people behind the initiative</p><h2 className="text-3xl sm:text-4xl font-semibold text-[#142640]">Founders</h2></div>
