@@ -574,3 +574,9 @@ body { overflow: hidden; }
 .site-header .site-nav-link:hover{color:#fff!important;border-color:#c49a53!important}
 .site-header .site-admin-link{background:#f4ead5!important;color:#142640!important;border-color:#e5d2ad!important}
 .site-header button[aria-label="Open menu"],.site-header button[aria-label="Close menu"]{color:#fff!important}
+
+/* Footer room for complete legal notice + creator credit */
+.site-footer{height:142px!important;padding:8px 0!important}
+.site-scroll-area{bottom:142px!important}
+.site-scroll-area #hero{min-height:calc(100dvh - 210px)!important}
+@media(max-width:640px){.site-footer{height:164px!important;padding:7px 0!important}.site-scroll-area{bottom:164px!important}.site-scroll-area #hero{min-height:calc(100dvh - 228px)!important}.site-footer p{font-size:9px!important;line-height:1.25!important}}
