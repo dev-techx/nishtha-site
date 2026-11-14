@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { supabase, type Article } from '@/lib/supabase';
-import { BookOpen, Pin, Loader2 } from 'lucide-react';
+import { BookOpen, Pin, Loader2, Scale, Globe, Users } from 'lucide-react';
 import ArticleModal from './ArticleModal';
 
 const SPINE_COLORS = [
@@ -154,6 +154,17 @@ export default function ArticleShelf() {
             </div>
           </>
         )}
+        <div className="mt-20 pt-12 border-t border-slate-200">
+          <div className="text-center mb-9"><p className="text-xs uppercase tracking-[.18em] text-[#a8792c] mb-2">Our focus areas</p><h2 className="text-3xl sm:text-4xl font-semibold text-[#142640]">Areas of Research</h2></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              {icon:Scale,title:'Governance & Reform',text:'Examining public administration, institutional frameworks, and governance reforms that shape effective policy.'},
+              {icon:Globe,title:'International Relations',text:'Exploring global affairs, diplomatic discourse, and the evolving dynamics of international cooperation.'},
+              {icon:BookOpen,title:'Public Policy',text:'Analyzing policy formulation, social development, and emerging challenges in the public sector.'},
+              {icon:Users,title:'Inclusive Dialogue',text:'Bringing together voices from government, academia, civil society, and the research community.'}
+            ].map(({icon:Icon,title,text})=><article key={title} className="bg-white border border-slate-200 rounded-xl p-6"><Icon size={25} className="text-[#a8792c] mb-4"/><h3 className="font-semibold text-lg text-[#142640] mb-2">{title}</h3><p className="text-sm leading-6 text-slate-600">{text}</p></article>)}
+          </div>
+        </div>
       </div>
 
       {selected && (
