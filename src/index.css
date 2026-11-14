@@ -498,3 +498,46 @@ body{background:#f7f8fa;color:#172235}
 .article-editorial-card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(20,35,55,.09);border-color:#cbd5e1}
 
 .hero-gradient{background:linear-gradient(125deg,#101c2c 0%,#1d3048 60%,#26364d 100%)}
+
+/* Fixed site chrome: only the central content panel scrolls */
+html, body, #root { height: 100%; min-height: 0; }
+body { overflow: hidden; }
+.site-frame { position: fixed; inset: 0; height: 100dvh; width: 100%; overflow: hidden; }
+.site-scroll-area {
+  position: absolute;
+  top: 72px;
+  bottom: 112px;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+.site-scroll-area > section { scroll-margin-top: 12px; }
+.site-scroll-area #hero { min-height: calc(100dvh - 184px); }
+.site-scroll-area #about,
+.site-scroll-area #articles { scroll-margin-top: 16px; }
+.site-frame > nav { z-index: 60; }
+.site-frame > footer {
+  position: fixed;
+  z-index: 50;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 112px;
+  overflow: hidden;
+  padding: 12px 0 8px !important;
+}
+.site-frame > footer .max-w-7xl { padding-left: 1rem; padding-right: 1rem; }
+.site-frame > footer .text-center.mb-6 { margin-bottom: 7px !important; }
+.site-frame > footer .text-2xl { font-size: 1.15rem; }
+.site-frame > footer .h-px { margin-bottom: 7px !important; }
+.site-frame > footer .mt-6 { margin-top: 7px !important; }
+.site-frame > footer .pt-6 { padding-top: 7px !important; }
+.site-frame > footer .text-xs { font-size: 10px; line-height: 1.35; }
+@media (max-width: 640px) {
+  .site-scroll-area { top: 64px; bottom: 126px; }
+  .site-frame > footer { height: 126px; }
+  .site-scroll-area #hero { min-height: calc(100dvh - 190px); }
+}
