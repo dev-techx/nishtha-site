@@ -565,3 +565,12 @@ body { overflow: hidden; }
  .site-scroll-area #hero{min-height:calc(100dvh - 158px)!important}
  .site-footer .max-w-7xl{justify-content:center}
 }
+
+/* Mobile Safari header: explicit opaque brand bar and readable controls */
+.site-header{background:#142640!important;background-color:#142640!important;border-bottom:1px solid #263b59!important;box-shadow:0 4px 16px rgba(9,20,36,.16)!important;backdrop-filter:none!important}
+.site-header .text-\[\#142640\],.site-header .text-\[\#142640\] *{color:#fff!important}
+.site-header .header-mark{color:#f4ead5!important;border-color:#c49a53!important}
+.site-header .site-nav-link{color:#e7edf5!important}
+.site-header .site-nav-link:hover{color:#fff!important;border-color:#c49a53!important}
+.site-header .site-admin-link{background:#f4ead5!important;color:#142640!important;border-color:#e5d2ad!important}
+.site-header button[aria-label="Open menu"],.site-header button[aria-label="Close menu"]{color:#fff!important}
