@@ -1,85 +1,71 @@
 import { Users, Globe, Scale, BookOpen } from 'lucide-react';
 
+const founders = [
+  {
+    name: 'Shivangi Khare',
+    role: 'Founder & Project Director, Project NISHTHA',
+    bio: 'I believe meaningful governance begins with informed conversations and the courage to ask questions. Through Project NISHTHA, I hope to create a platform that brings together citizens, policymakers, academicians and professionals to encourage dialogue, transparency and accountability. My vision is to make governance more accessible, participatory and people-centric.',
+  },
+  {
+    name: 'Krishna Chawla',
+    role: 'Co-Founder, Project NISHTHA',
+    bio: 'With a strong interest in public policy, governance and international relations, I believe meaningful change comes through informed dialogue and collaborative thinking. Through Project NISHTHA, I aim to contribute to building a platform that encourages transparency, accountability and constructive engagement between institutions and citizens.',
+  },
+];
+
+const leadership = [
+  {
+    name: 'Dr. Aastha Srivastav',
+    role: 'Doctor (DGO) | Founder, Sankalp Matri Evam Shishu Kalyan Samiti',
+    bio: 'A medical professional and social development advocate, Dr. Aastha Srivastav founded Sankalp to support maternal and child welfare and contribute to community well-being.',
+  },
+  {
+    name: 'Dr. Rajesh Kumar Khare',
+    role: 'MBBS, MD | President, Sankalp Matri Evam Shishu Kalyan Samiti',
+    bio: 'An experienced medical professional, Dr. Rajesh Kumar Khare serves as President of Sankalp, supporting its mission of social welfare, community development and institutional growth.',
+  },
+];
+
 export default function About() {
   const pillars = [
-    {
-      icon: Scale,
-      title: 'Governance & Reform',
-      text: 'Examining public administration, institutional frameworks, and governance reforms that shape effective policy.',
-    },
-    {
-      icon: Globe,
-      title: 'International Relations',
-      text: 'Exploring global affairs, diplomatic discourse, and the evolving dynamics of international cooperation.',
-    },
-    {
-      icon: BookOpen,
-      title: 'Public Policy',
-      text: 'Analyzing policy formulation, social development, and emerging challenges in the public sector.',
-    },
-    {
-      icon: Users,
-      title: 'Inclusive Dialogue',
-      text: 'Bringing together voices from government, academia, civil society, and the research community.',
-    },
+    { icon: Scale, title: 'Governance & Reform', text: 'Examining public administration, institutional frameworks, and governance reforms that shape effective policy.' },
+    { icon: Globe, title: 'International Relations', text: 'Exploring global affairs, diplomatic discourse, and the evolving dynamics of international cooperation.' },
+    { icon: BookOpen, title: 'Public Policy', text: 'Analyzing policy formulation, social development, and emerging challenges in the public sector.' },
+    { icon: Users, title: 'Inclusive Dialogue', text: 'Bringing together voices from government, academia, civil society, and the research community.' },
   ];
 
   return (
-    <section id="about" className="py-20 lg:py-28 library-bg relative">
+    <section id="about" className="py-20 lg:py-28 bg-[#f7f6f2]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <div className="text-center mb-16">
-          <p className="font-ui text-sm uppercase tracking-widest text-library-gold mb-3">
-            Our Mission
-          </p>
-          <h2 className="font-serif-display text-4xl sm:text-5xl md:text-6xl font-bold text-library-wood-dark mb-6">
-            About NISHTHA
-          </h2>
-          <div className="gold-divider mx-auto w-32" />
+        <div className="text-center mb-14">
+          <p className="text-sm uppercase tracking-[.18em] text-[#a8792c] mb-3">Our Mission</p>
+          <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-[#142640] mb-5">About NISHTHA</h2>
+          <div className="h-px bg-[#c49a53] w-20 mx-auto" />
         </div>
-
-        {/* Main description */}
-        <div className="paper-bg rounded-lg p-8 md:p-12 mb-16 shadow-md ornament">
-          <p className="font-body text-lg md:text-xl text-library-ink leading-relaxed text-center max-w-4xl mx-auto">
-            Established with the vision of strengthening governance discourse, NISHTHA seeks to
-            bridge the gap between policy formulation, administrative practice, and public
-            understanding. Our publication explores subjects across public administration,
-            governance reforms, international relations, public policy, social development,
-            institutional frameworks, and emerging challenges in the public sector.
+        <div className="bg-white border border-slate-200 rounded-2xl p-7 md:p-11 mb-14">
+          <p className="text-lg md:text-xl text-slate-700 leading-8 text-center max-w-4xl mx-auto">
+            Established with the vision of strengthening governance discourse, NISHTHA seeks to bridge the gap between policy formulation, administrative practice, and public understanding. Our publication explores subjects across public administration, governance reforms, international relations, public policy, social development, institutional frameworks, and emerging challenges in the public sector.
           </p>
-          <div className="gold-divider mx-auto w-24 my-6" />
-          <p className="font-body text-base md:text-lg text-library-wood-mid leading-relaxed text-center max-w-3xl mx-auto italic">
-            We bring together diverse voices from government, academia, civil society, and the
-            research community to examine contemporary issues, exchange perspectives, and highlight
-            ideas that can contribute to effective and inclusive governance.
+          <p className="text-base md:text-lg text-slate-500 leading-7 text-center max-w-3xl mx-auto mt-5">
+            We bring together diverse voices from government, academia, civil society, and the research community to examine contemporary issues, exchange perspectives, and highlight ideas that can contribute to effective and inclusive governance.
           </p>
         </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {pillars.map(({icon: Icon, title, text}) => <div key={title} className="bg-white border border-slate-200 rounded-xl p-6"><Icon size={25} className="text-[#a8792c] mb-4"/><h3 className="font-semibold text-lg text-[#142640] mb-2">{title}</h3><p className="text-sm leading-6 text-slate-600">{text}</p></div>)}
+        </div>
+      </div>
 
-        {/* Pillars grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {pillars.map((pillar, idx) => {
-            const Icon = pillar.icon;
-            return (
-              <div
-                key={idx}
-                className="paper-bg rounded-lg p-6 text-center shadow-sm hover:shadow-md transition-smooth hover:-translate-y-1 group"
-              >
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-library-wood-dark/5 mb-4 group-hover:bg-library-gold/10 transition-smooth">
-                  <Icon
-                    size={28}
-                    className="text-library-wood-mid group-hover:text-library-gold transition-smooth"
-                    strokeWidth={1.5}
-                  />
-                </div>
-                <h3 className="font-serif-display text-xl font-semibold text-library-wood-dark mb-2">
-                  {pillar.title}
-                </h3>
-                <p className="font-body text-sm text-library-ink/70 leading-relaxed">
-                  {pillar.text}
-                </p>
-              </div>
-            );
-          })}
+      <div id="founders" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
+        <div className="text-center mb-10"><p className="text-sm uppercase tracking-[.18em] text-[#a8792c] mb-3">The people behind the initiative</p><h2 className="text-3xl sm:text-4xl font-semibold text-[#142640]">Founders</h2></div>
+        <div className="grid md:grid-cols-2 gap-6">
+          {founders.map(person => <article key={person.name} className="bg-white border border-slate-200 rounded-2xl p-7 md:p-9"><h3 className="text-2xl font-semibold text-[#142640]">{person.name}</h3><p className="text-sm font-medium text-[#a8792c] mt-2 mb-5">{person.role}</p><p className="text-slate-600 leading-7">{person.bio}</p></article>)}
+        </div>
+      </div>
+
+      <div id="leadership" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+        <div className="text-center mb-10"><p className="text-sm uppercase tracking-[.18em] text-[#a8792c] mb-3">Parent organisation</p><h2 className="text-3xl sm:text-4xl font-semibold text-[#142640]">Sankalp Leadership</h2></div>
+        <div className="grid md:grid-cols-2 gap-6">
+          {leadership.map(person => <article key={person.name} className="bg-white border border-slate-200 rounded-2xl p-7 md:p-9"><h3 className="text-2xl font-semibold text-[#142640]">{person.name}</h3><p className="text-sm font-medium text-[#a8792c] mt-2 mb-5">{person.role}</p><p className="text-slate-600 leading-7">{person.bio}</p></article>)}
         </div>
       </div>
     </section>
