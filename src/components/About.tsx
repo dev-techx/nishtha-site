@@ -50,7 +50,7 @@ export default function About() {
             We bring together diverse voices from government, academia, civil society, and the research community to examine contemporary issues, exchange perspectives, and highlight ideas that can contribute to effective and inclusive governance.
           </p>
         </div>
-/div>
+      </div>
 
       <div id="founders" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
         <div className="text-center mb-10"><p className="text-sm uppercase tracking-[.18em] text-[#a8792c] mb-3">The people behind the initiative</p><h2 className="text-3xl sm:text-4xl font-semibold text-[#142640]">Founders</h2></div>
