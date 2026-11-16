@@ -213,6 +213,21 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
     }
   };
 
+  const handleBulkPin = async () => {
+    const candidates = articles.filter((a) => selectedIds.has(a.id) && !a.pinned);
+    const slots = Math.max(0, 3 - pinnedCount);
+    if (candidates.length > slots) { showError('Only ' + slots + ' pin slot(s) available. Select fewer articles or unpin first.'); return; }
+    if (!candidates.length) { showError('Selected articles are already pinned.'); return; }
+    const start = Math.max(0, ...articles.filter((a) => a.pinned).map((a) => a.pin_rank || 0));
+    for (let i = 0; i < candidates.length; i++) {
+      const result = await supabase.from('articles').update({ pinned: true, pin_rank: start + i + 1 }).eq('id', candidates[i].id);
+      if (result.error) { showError('Bulk pin failed: ' + result.error.message); await fetchData(); return; }
+    }
+    showSuccess(candidates.length + ' article(s) pinned.');
+    setSelectedIds(new Set());
+    await fetchData();
+  };
+
   const handleBulkDelete = async () => {
     if (selectedIds.size === 0) return;
     if (!confirm(`Delete ${selectedIds.size} selected articles? This cannot be undone.`)) return;
@@ -375,6 +390,9 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
                 )}
                 Generate Newsletter PDF
               </button>
+              {selectedIds.size > 0 && (
+                <button onClick={handleBulkPin} className="btn-gold flex items-center gap-2"><Pin size={16}/>Pin Selected</button>
+              )}
               {selectedIds.size > 0 && (
                 <button
                   onClick={handleBulkDelete}
