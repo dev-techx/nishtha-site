@@ -23,3 +23,5 @@ export interface Subscriber {
   email: string;
   created_at: string;
 }
+
+export interface MagazineIssue { id:string; issue_number:number; title:string; description:string; cover_image_url:string|null; published_at:string|null; created_at:string }
