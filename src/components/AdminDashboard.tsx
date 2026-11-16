@@ -32,7 +32,9 @@ const EMPTY_FORM: EditForm = {
 
 export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps) {
   const [tab, setTab] = useState<Tab>('articles');
-  const [articles, setArticles] = useState<Article[]>([]);\n  const [issues, setIssues] = useState<MagazineIssue[]>([]);\n  const [activeIssueId, setActiveIssueId] = useState<string>('');
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [issues, setIssues] = useState<MagazineIssue[]>([]);
+  const [activeIssueId, setActiveIssueId] = useState<string>('');
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -59,7 +61,8 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
     ]);
     if (artRes.error) showError('Articles load failed: ' + artRes.error.message);
     else setArticles((artRes.data || []) as Article[]);
-    if(issueRes.error) showError('Issues load failed: '+issueRes.error.message); else { const loaded=(issueRes.data||[]) as MagazineIssue[]; setIssues(loaded); setActiveIssueId(current=>current||loaded[0]?.id||''); }\n    if (subRes.error) showError('Subscribers load failed: ' + subRes.error.message);
+    if(issueRes.error) showError('Issues load failed: '+issueRes.error.message); else { const loaded=(issueRes.data||[]) as MagazineIssue[]; setIssues(loaded); setActiveIssueId(current=>current||loaded[0]?.id||''); }
+    if (subRes.error) showError('Subscribers load failed: ' + subRes.error.message);
     else setSubscribers((subRes.data || []) as Subscriber[]);
     setLoading(false);
   }, []);
@@ -132,7 +135,9 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
     fetchData();
   };
 
-  const createIssue=async()=>{const next=Math.max(0,...issues.map(i=>i.issue_number))+1;const {data,error}=await supabase.from('magazine_issues').insert({issue_number:next,title:'Issue '+String(next).padStart(2,'0'),description:''}).select('*').single();if(error){showError('Create issue failed: '+error.message);return;}setIssues([...issues,data as MagazineIssue]);setActiveIssueId(data.id);showSuccess('Issue '+String(next).padStart(2,'0')+' created');};\n  const deleteIssue=async()=>{const issue=issues.find(i=>i.id===activeIssueId);if(!issue)return;if(!confirm(issue.title+' delete? Articles will be moved to Issue 01 (not deleted).'))return;const fallback=issues.find(i=>i.issue_number===1&&i.id!==issue.id);if(fallback){const move=await supabase.from('articles').update({issue_id:fallback.id}).eq('issue_id',issue.id);if(move.error){showError(move.error.message);return;}}const del=await supabase.from('magazine_issues').delete().eq('id',issue.id);if(del.error){showError(del.error.message);return;}setActiveIssueId(fallback?.id||'');showSuccess('Issue deleted; articles preserved');await fetchData();};\n  const handleClearText = () => {
+  const createIssue=async()=>{const next=Math.max(0,...issues.map(i=>i.issue_number))+1;const {data,error}=await supabase.from('magazine_issues').insert({issue_number:next,title:'Issue '+String(next).padStart(2,'0'),description:''}).select('*').single();if(error){showError('Create issue failed: '+error.message);return;}setIssues([...issues,data as MagazineIssue]);setActiveIssueId(data.id);showSuccess('Issue '+String(next).padStart(2,'0')+' created');};
+  const deleteIssue=async()=>{const issue=issues.find(i=>i.id===activeIssueId);if(!issue)return;if(!confirm(issue.title+' delete? Articles will be moved to Issue 01 (not deleted).'))return;const fallback=issues.find(i=>i.issue_number===1&&i.id!==issue.id);if(fallback){const move=await supabase.from('articles').update({issue_id:fallback.id}).eq('issue_id',issue.id);if(move.error){showError(move.error.message);return;}}const del=await supabase.from('magazine_issues').delete().eq('id',issue.id);if(del.error){showError(del.error.message);return;}setActiveIssueId(fallback?.id||'');showSuccess('Issue deleted; articles preserved');await fetchData();};
+  const handleClearText = () => {
     setEditForm(EMPTY_FORM);
   };
 
@@ -281,7 +286,8 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
   };
 
   // --- Filtered articles ---
-  const issueArticles=articles.filter(a=>(a as Article & {issue_id?:string}).issue_id===activeIssueId);\n  const filteredArticles = issueArticles.filter((a) => a.heading.toLowerCase().includes(search.toLowerCase()) || a.name.toLowerCase().includes(search.toLowerCase())).sort((a,b) => {
+  const issueArticles=articles.filter(a=>(a as Article & {issue_id?:string}).issue_id===activeIssueId);
+  const filteredArticles = issueArticles.filter((a) => a.heading.toLowerCase().includes(search.toLowerCase()) || a.name.toLowerCase().includes(search.toLowerCase())).sort((a,b) => {
     if (sortBy === 'oldest') return a.created_at.localeCompare(b.created_at);
     if (sortBy === 'title') return a.heading.localeCompare(b.heading);
     if (sortBy === 'pinned') return Number(b.pinned)-Number(a.pinned) || (a.pin_rank ?? 99)-(b.pin_rank ?? 99);
