@@ -56,8 +56,10 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
         .order('created_at', { ascending: false }),
       supabase.from('subscribers').select('*').order('created_at', { ascending: false }),
     ]);
-    if (artRes.data) setArticles(artRes.data as Article[]);
-    if (subRes.data) setSubscribers(subRes.data as Subscriber[]);
+    if (artRes.error) showError('Articles load failed: ' + artRes.error.message);
+    else setArticles((artRes.data || []) as Article[]);
+    if (subRes.error) showError('Subscribers load failed: ' + subRes.error.message);
+    else setSubscribers((subRes.data || []) as Subscriber[]);
     setLoading(false);
   }, []);
 
@@ -202,7 +204,8 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
   };
 
   const toggleSelectAll = () => {
-    if (selectedIds.size === filteredArticles.length) {
+    const allFilteredSelected = filteredArticles.length > 0 && filteredArticles.every((a) => selectedIds.has(a.id));
+    if (allFilteredSelected) {
       setSelectedIds(new Set());
     } else {
       setSelectedIds(new Set(filteredArticles.map((a) => a.id)));
@@ -405,14 +408,14 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
               {filteredArticles.length > 0 && (
                 <div className="flex items-center gap-3 paper-bg rounded-md px-4 py-2">
                   <button onClick={toggleSelectAll} className="text-library-wood-mid hover:text-library-gold">
-                    {selectedIds.size === filteredArticles.length && filteredArticles.length > 0 ? (
+                    {filteredArticles.length > 0 && filteredArticles.every((a) => selectedIds.has(a.id)) ? (
                       <CheckSquare size={18} />
                     ) : (
                       <Square size={18} />
                     )}
                   </button>
                   <span className="font-ui text-sm text-library-wood-mid">
-                    {selectedIds.size === filteredArticles.length && filteredArticles.length > 0
+                    {filteredArticles.length > 0 && filteredArticles.every((a) => selectedIds.has(a.id))
                       ? 'Deselect All'
                       : 'Select All'}
                   </span>
