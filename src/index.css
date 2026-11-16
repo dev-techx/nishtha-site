@@ -580,3 +580,35 @@ body { overflow: hidden; }
 .site-scroll-area{bottom:142px!important}
 .site-scroll-area #hero{min-height:calc(100dvh - 210px)!important}
 @media(max-width:640px){.site-footer{height:164px!important;padding:7px 0!important}.site-scroll-area{bottom:164px!important}.site-scroll-area #hero{min-height:calc(100dvh - 228px)!important}.site-footer p{font-size:9px!important;line-height:1.25!important}}
+
+/* Admin usability patch: consistent sizing, clear fields, no icon/text collisions */
+*,*::before,*::after{box-sizing:border-box}
+.admin-panel{color:#172235}
+.admin-panel input,.admin-panel textarea,.admin-panel select{width:100%;min-width:0;box-sizing:border-box}
+.admin-panel .input-library{display:block;width:100%;min-width:0;padding:12px 14px;background:#fff;color:#172235;border:1px solid #cbd5e1;border-radius:7px;font:400 14px/1.5 Inter,system-ui,sans-serif}
+.admin-panel .input-library:focus{border-color:#9b7a3d;box-shadow:0 0 0 3px rgba(196,154,83,.15)}
+.admin-panel textarea.input-library{min-height:220px;resize:vertical;line-height:1.65}
+.admin-panel button{line-height:1.25}
+.admin-panel button svg{flex-shrink:0;display:block}
+.admin-panel .article-row-actions{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:4px;min-width:0}
+.admin-panel .article-row-actions button{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px}
+.admin-panel .article-row-actions button:hover{background:#edf2f7}
+.admin-panel .admin-form-modal{width:min(720px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain}
+.admin-panel .admin-form-modal .modal-fields{padding:clamp(14px,3vw,26px);display:grid;gap:18px}
+.admin-panel .admin-form-modal label{display:block;margin-bottom:7px;font-size:13px;font-weight:600;color:#334155}
+.admin-panel .admin-form-modal .field-actions{display:flex;flex-wrap:wrap;gap:9px}
+.admin-panel .admin-form-modal .field-actions button{min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.admin-panel .admin-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.admin-panel .admin-toolbar button{min-height:42px;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.admin-panel .admin-article-card{border:1px solid #e2e8f0;border-radius:10px;background:#fff;padding:14px}
+.admin-panel .admin-article-card .article-main{display:flex;align-items:flex-start;gap:12px;min-width:0}
+.admin-panel .admin-article-card .article-copy{flex:1;min-width:0}
+.admin-panel .admin-article-card .article-copy h3{overflow-wrap:anywhere;white-space:normal}
+@media(max-width:640px){
+ .admin-panel .admin-article-card .article-main{flex-wrap:wrap}
+ .admin-panel .admin-article-card .article-copy{flex-basis:calc(100% - 45px)}
+ .admin-panel .article-row-actions{width:100%;justify-content:flex-start;padding-left:30px}
+ .admin-panel .admin-form-modal .field-actions button{flex:1 1 auto}
+ .admin-panel .admin-toolbar>*{flex:1 1 auto}
+ .admin-panel .admin-toolbar .search-field{flex:1 1 100%;max-width:none}
+}
