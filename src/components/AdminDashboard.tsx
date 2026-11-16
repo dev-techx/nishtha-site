@@ -92,7 +92,7 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
       name: editForm.name.trim(),
       heading: editForm.heading.trim(),
       description: editForm.description.trim(),
-      image_url: editForm.image_url.trim() || null,
+      image_url: editForm.image_url.trim() || null,\n      issue_id: activeIssueId || null,
     };
 
     try {
@@ -372,7 +372,7 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
           </div>
         ) : tab === 'articles' ? (
           <>
-            {/* Action bar */}
+            {/* Magazine issue controls */}\n            <section className="mb-5 rounded-xl border border-slate-200 bg-white p-4 shadow-sm"><div className="flex flex-wrap items-center justify-between gap-3"><div><p className="text-xs uppercase tracking-widest text-amber-700">Magazine editions</p><h2 className="text-lg font-semibold text-slate-800">Manage Issues</h2></div><div className="flex flex-wrap gap-2"><select aria-label="Current magazine issue" value={activeIssueId} onChange={e=>{setActiveIssueId(e.target.value);setSelectedIds(new Set());}} className="rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800">{issues.map(i=><option key={i.id} value={i.id}>Issue {String(i.issue_number).padStart(2,'0')} — {i.title}</option>)}</select><button onClick={createIssue} className="btn-gold">+ Add Issue</button><button onClick={deleteIssue} disabled={!activeIssueId||issues.length<=1} className="rounded-md border border-red-200 px-3 py-2 text-sm text-red-700 disabled:opacity-40">Delete Issue</button></div></div><p className="mt-2 text-xs text-slate-500">Articles below belong to the selected edition. New articles publish into it; edit an article while another issue is selected to move it.</p></section>\n            {/* Action bar */}
             <div className="admin-toolbar flex flex-wrap items-center gap-3 mb-4">
               <button
                 onClick={() => {
