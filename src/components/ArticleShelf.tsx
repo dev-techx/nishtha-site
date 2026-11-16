@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { supabase, type Article } from '@/lib/supabase';
+import { supabase, type Article, type MagazineIssue } from '@/lib/supabase';
 import { BookOpen, Pin, Loader2, Scale, Globe, Users } from 'lucide-react';
 import ArticleModal from './ArticleModal';
 
@@ -13,12 +13,12 @@ const SPINE_COLORS = [
 ];
 
 export default function ArticleShelf() {
-  const [articles, setArticles] = useState<Article[]>([]);
+  const [articles, setArticles] = useState<Article[]>([]);\n  const [issues,setIssues]=useState<MagazineIssue[]>([]);\n  const [activeIssue,setActiveIssue]=useState<string>('');
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Article | null>(null);
 
   useEffect(() => {
-    fetchArticles();
+    fetchArticles();\n    supabase.from('magazine_issues').select('*').order('issue_number',{ascending:false}).then(({data})=>{const list=(data||[]) as MagazineIssue[];setIssues(list);setActiveIssue(list[0]?.id||'');});
   }, []);
 
   const fetchArticles = async () => {
@@ -67,14 +67,14 @@ export default function ArticleShelf() {
           <div className="gold-divider mx-auto w-32" />
         </div>
 
-        {loading ? (
+        {issues.length>0&&<div className="flex flex-wrap items-center justify-between gap-3 mb-8 rounded-xl border border-slate-200 bg-white p-4"><div><p className="text-xs uppercase tracking-widest text-[#a8792c]">Magazine archive</p><h3 className="text-xl font-semibold text-[#142640]">{issues.find(i=>i.id===activeIssue)?.title||'Latest Issue'}</h3></div><select aria-label="Browse magazine issue" value={activeIssue} onChange={e=>setActiveIssue(e.target.value)} className="rounded-lg border border-slate-300 bg-white px-4 py-2 text-[#142640]">{issues.map(i=><option key={i.id} value={i.id}>Issue {String(i.issue_number).padStart(2,'0')} — {i.title}</option>)}</select></div>}\n        {loading ? (
           <div className="flex flex-col items-center justify-center py-20">
             <Loader2 size={40} className="text-library-gold animate-spin" />
             <p className="font-ui text-library-ink/60 mt-4">Loading articles...</p>
           </div>
         ) : (
           <>
-            {/* Pinned articles — featured display */}
+            {issueArticles.length===0&&<div className='text-center py-12 text-slate-500'>No articles have been published in this issue yet.</div>}\n            {/* Pinned articles — featured display */}
             {pinnedArticles.length > 0 && (
               <div className="mb-12">
                 <div className="flex items-center gap-2 mb-6">
