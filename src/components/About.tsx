@@ -39,7 +39,7 @@ export default function About() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-14">
           <p className="text-sm uppercase tracking-[.18em] text-[#a8792c] mb-3">Our Mission</p>
-          <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-[#142640] mb-5">About NISHTHA</h2>
+          <h2 className="about-heading text-4xl sm:text-5xl font-semibold tracking-tight text-[#142640] mb-5"><img src="/nishtha-site/logos/NISHTHA%20LOGO.jpeg" alt="Project NISHTHA emblem" className="about-nishtha-logo"/>About NISHTHA</h2>
           <div className="h-px bg-[#c49a53] w-20 mx-auto" />
         </div>
         <div className="bg-white border border-slate-200 rounded-2xl p-7 md:p-11 mb-14">
