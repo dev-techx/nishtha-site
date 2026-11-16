@@ -89,23 +89,25 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
       image_url: editForm.image_url.trim() || null,
     };
 
-    if (editForm.id) {
-      const { error } = await supabase
-        .from('articles')
-        .update({ ...payload, updated_at: new Date().toISOString() })
-        .eq('id', editForm.id);
-      if (error) showError('Failed to update article.');
-      else showSuccess('Article updated successfully.');
-    } else {
-      const { error } = await supabase.from('articles').insert(payload);
-      if (error) showError('Failed to create article.');
-      else showSuccess('Article created successfully.');
+    try {
+      if (editForm.id) {
+        const result = await supabase.from('articles').update({ ...payload, updated_at: new Date().toISOString() }).eq('id', editForm.id);
+        if (result.error) throw result.error;
+        showSuccess('Article updated successfully.');
+      } else {
+        const result = await supabase.from('articles').insert(payload).select('id').single();
+        if (result.error) throw result.error;
+        showSuccess('Article published successfully.');
+      }
+      setShowForm(false);
+      setEditForm(EMPTY_FORM);
+      setSelectedIds(new Set());
+      await fetchData();
+    } catch (err) {
+      showError('Save failed: ' + (err instanceof Error ? err.message : 'Unknown database error') + '. Check Supabase admin session and RLS migration.');
+    } finally {
+      setSaving(false);
     }
-
-    setSaving(false);
-    setShowForm(false);
-    setEditForm(EMPTY_FORM);
-    fetchData();
   };
 
   const handleEdit = (article: Article) => {
