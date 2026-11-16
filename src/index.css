@@ -623,3 +623,9 @@ body { overflow: hidden; }
  .admin-panel .search-field{flex:1 1 100%;width:100%;max-width:none;margin-left:0}
  .admin-panel select.input-library{width:100%!important;flex:1 1 100%}
 }
+
+/* Official identity marks */
+.nav-nishtha-logo{width:38px;height:38px;object-fit:contain;border-radius:50%;background:#f8f5eb;padding:2px;flex-shrink:0}
+.footer-brand-logos{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:4px}
+.footer-brand-logos img{width:48px;height:48px;object-fit:contain;background:#fff;border-radius:8px;padding:3px}
+@media(max-width:640px){.nav-nishtha-logo{width:32px;height:32px}.footer-brand-logos img{width:38px;height:38px}.footer-brand-logos{gap:10px;margin-bottom:2px}}
