@@ -12,7 +12,7 @@ ALTER TABLE public.articles ADD COLUMN IF NOT EXISTS issue_id uuid REFERENCES pu
 INSERT INTO public.magazine_issues(issue_number,title,description,published_at)
 VALUES (1,'Issue 01','The inaugural NISHTHA magazine issue',now())
 ON CONFLICT(issue_number) DO NOTHING;
-UPDATE public.articles SET issue_id=(SELECT id FROM public.magazine_issues WHERE issue_number=1)
+\nINSERT INTO public.magazine_issues(issue_number,title,description) VALUES\n (2,'Issue 02','Second NISHTHA magazine edition'),\n (3,'Issue 03','Third NISHTHA magazine edition')\nON CONFLICT(issue_number) DO NOTHING;\nUPDATE public.articles SET issue_id=(SELECT id FROM public.magazine_issues WHERE issue_number=1)
 WHERE issue_id IS NULL;
 ALTER TABLE public.magazine_issues ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "issues_public_read" ON public.magazine_issues;
