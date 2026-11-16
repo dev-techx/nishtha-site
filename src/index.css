@@ -612,3 +612,14 @@ body { overflow: hidden; }
  .admin-panel .admin-toolbar>*{flex:1 1 auto}
  .admin-panel .admin-toolbar .search-field{flex:1 1 100%;max-width:none}
 }
+
+/* Admin search: prevent global input width rule from colliding with magnifier */
+.admin-panel .search-field{position:relative;display:block;flex:1 1 280px;width:auto;min-width:220px;max-width:480px;margin-left:auto}
+.admin-panel .search-field>svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:17px;height:17px;pointer-events:none;z-index:2}
+.admin-panel .search-field input.input-library{display:block;width:100%;height:46px;padding:10px 12px 10px 38px!important;margin:0}
+.admin-panel select.input-library{display:block;width:auto!important;min-width:170px;max-width:100%;height:46px;padding:10px 34px 10px 12px!important;flex:0 0 auto}
+.admin-panel .admin-toolbar{align-items:center}
+@media(max-width:640px){
+ .admin-panel .search-field{flex:1 1 100%;width:100%;max-width:none;margin-left:0}
+ .admin-panel select.input-library{width:100%!important;flex:1 1 100%}
+}
