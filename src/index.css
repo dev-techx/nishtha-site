@@ -646,3 +646,8 @@ body { overflow: hidden; }
  .site-footer p{font-size:9px!important;line-height:1.25!important;padding:0 8px}
 }
 @media(prefers-reduced-motion:reduce){.footer-brand-logos img{transition:none}}
+
+/* Place the official emblem beside About title, with seamless light treatment */
+.about-heading{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.about-nishtha-logo{width:58px;height:58px;object-fit:contain;border-radius:50%;background:#f7f6f2;padding:2px;box-shadow:0 0 0 1px rgba(196,154,83,.28);filter:saturate(.88);flex:0 0 auto}
+@media(max-width:640px){.about-heading{gap:10px}.about-nishtha-logo{width:42px;height:42px}}
