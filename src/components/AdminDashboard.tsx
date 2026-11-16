@@ -352,7 +352,7 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
         ) : tab === 'articles' ? (
           <>
             {/* Action bar */}
-            <div className="flex flex-wrap items-center gap-3 mb-4">
+            <div className="admin-toolbar flex flex-wrap items-center gap-3 mb-4">
               <button
                 onClick={() => {
                   setEditForm(EMPTY_FORM);
@@ -384,7 +384,7 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
                   Delete Selected ({selectedIds.size})
                 </button>
               )}
-              <div className="relative flex-1 min-w-[180px] max-w-xs ml-auto">
+              <div className="search-field relative flex-1 min-w-[180px] max-w-xs ml-auto">
                 <Search
                   size={16}
                   className="absolute left-3 top-1/2 -translate-y-1/2 text-library-wood-light"
@@ -397,6 +397,9 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
                   className="input-library pl-9 py-2 text-sm"
                 />
               </div>
+              <select aria-label="Sort articles" value={sortBy} onChange={(e) => setSortBy(e.target.value as typeof sortBy)} className="input-library w-auto min-w-[150px] py-2 text-sm">
+                <option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="title">Title A-Z</option><option value="pinned">Pinned first</option>
+              </select>
             </div>
 
             {/* Pinned counter */}
@@ -431,7 +434,7 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
                     selectedIds.has(article.id) ? 'ring-2 ring-library-gold' : ''
                   }`}
                 >
-                  <div className="flex items-start gap-3">
+                  <div className="article-main flex items-start gap-3">
                     {/* Select checkbox */}
                     <button
                       onClick={() => toggleSelect(article.id)}
@@ -459,7 +462,7 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
                     )}
 
                     {/* Content */}
-                    <div className="flex-1 min-w-0">
+                    <div className="article-copy flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap mb-1">
                         {article.pinned && (
                           <span className="pin-badge">
@@ -479,7 +482,7 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
                     </div>
 
                     {/* Actions */}
-                    <div className="flex flex-col sm:flex-row items-end sm:items-center gap-1 flex-shrink-0">
+                    <div className="article-row-actions flex flex-col sm:flex-row items-end sm:items-center gap-1 flex-shrink-0">
                       {/* Pin */}
                       <button
                         onClick={() => togglePin(article)}
