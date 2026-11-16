@@ -8,7 +8,7 @@ export default function Navbar({onNavigate,onAdminClick}:NavbarProps){
  return <>
  <nav className="site-header fixed top-0 left-0 right-0 z-50">
   <div className="max-w-7xl mx-auto h-[68px] px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-   <button onClick={()=>go('hero')} className="flex items-center gap-3" aria-label="NISHTHA home"><span className="header-mark">N</span><span className="text-[#142640] font-semibold tracking-[.14em] text-lg sm:text-xl">NISHTHA</span></button>
+   <button onClick={()=>go('hero')} className="flex items-center gap-3" aria-label="NISHTHA home"><img src="/nishtha-site/logos/NISHTHA%20LOGO.jpeg" alt="Project NISHTHA logo" className="nav-nishtha-logo"/><span className="text-white font-semibold tracking-[.14em] text-lg sm:text-xl">NISHTHA</span></button>
    <div className="hidden md:flex items-center gap-7">{items.map(i=><button key={i.section} onClick={()=>go(i.section)} className="site-nav-link">{i.label}</button>)}<button onClick={onAdminClick} className="site-admin-link"><Lock size={14}/> Admin</button></div>
    <button onClick={()=>setIsOpen(!isOpen)} className="md:hidden text-[#142640] p-2" aria-label={isOpen?'Close menu':'Open menu'}>{isOpen?<X size={24}/>:<Menu size={24}/>}</button>
   </div>
