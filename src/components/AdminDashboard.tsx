@@ -39,6 +39,7 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
   const [editForm, setEditForm] = useState<EditForm>(EMPTY_FORM);
   const [saving, setSaving] = useState(false);
   const [search, setSearch] = useState('');
+  const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'title' | 'pinned'>('newest');
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -265,16 +266,17 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
   };
 
   // --- Filtered articles ---
-  const filteredArticles = articles.filter(
-    (a) =>
-      a.heading.toLowerCase().includes(search.toLowerCase()) ||
-      a.name.toLowerCase().includes(search.toLowerCase()),
-  );
+  const filteredArticles = articles.filter((a) => a.heading.toLowerCase().includes(search.toLowerCase()) || a.name.toLowerCase().includes(search.toLowerCase())).sort((a,b) => {
+    if (sortBy === 'oldest') return a.created_at.localeCompare(b.created_at);
+    if (sortBy === 'title') return a.heading.localeCompare(b.heading);
+    if (sortBy === 'pinned') return Number(b.pinned)-Number(a.pinned) || (a.pin_rank ?? 99)-(b.pin_rank ?? 99);
+    return b.created_at.localeCompare(a.created_at);
+  });
 
   const pinnedCount = articles.filter((a) => a.pinned).length;
 
   return (
-    <div className="min-h-screen library-bg">
+    <div className="admin-panel min-h-screen library-bg">
       {/* Top bar */}
       <div className="wood-bg sticky top-0 z-30 shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
@@ -425,7 +427,7 @@ export default function AdminDashboard({ onLogout, onBack }: AdminDashboardProps
               {filteredArticles.map((article) => (
                 <div
                   key={article.id}
-                  className={`paper-bg rounded-lg p-4 shadow-sm transition-smooth ${
+                  className={`admin-article-card paper-bg rounded-lg p-4 shadow-sm transition-smooth ${
                     selectedIds.has(article.id) ? 'ring-2 ring-library-gold' : ''
                   }`}
                 >
@@ -663,7 +665,7 @@ function ArticleFormModal({
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
 
       <div
-        className="relative book-page rounded-lg max-w-2xl w-full max-h-[92vh] overflow-y-auto animate-fade-in-up shadow-2xl"
+        className="admin-form-modal relative book-page rounded-lg max-w-2xl w-full max-h-[92vh] overflow-y-auto animate-fade-in-up shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -679,7 +681,7 @@ function ArticleFormModal({
           </button>
         </div>
 
-        <div className="p-6 space-y-4">
+        <div className="modal-fields p-6 space-y-4">
           {/* Name */}
           <div>
             <label className="block font-ui text-sm font-medium text-library-wood-dark mb-1.5">
